@@ -1,34 +1,43 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import { Children, useState } from "react";
+import { Provider, useSelector } from "react-redux";
+import { Navigate, Outlet, useRoutes } from "react-router-dom";
+import AuthLayout from "./containers/layouts/AuthLayout";
+import DefaultLayout from "./containers/layouts/DefaultLayout";
+import LoginPage from "./pages/Auth/Login";
+import { RootState, store } from "./store";
+import { theme } from "./themes";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const auth = useSelector((state: RootState) => state.auth);
+  const routes = useRoutes([
+    {
+      path: "/",
+      element: auth.logged ? <Outlet /> : <Navigate to="/auth/login" />,
+      children: [
+        {
+          element: <>Test</>,
+        },
+      ],
+    },
+    {
+      path: "/auth",
+      element: <AuthLayout />,
+      children: [
+        {
+          path: "login",
+          element: <LoginPage />,
+        },
+      ],
+    },
+  ]);
 
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+    <>
+      <CssBaseline />
+      <ThemeProvider theme={theme}>{routes}</ThemeProvider>;
+    </>
+  );
 }
 
-export default App
+export default App;
