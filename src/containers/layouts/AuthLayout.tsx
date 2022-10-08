@@ -1,8 +1,10 @@
-import { Button, Grid, Paper, TextField } from "@mui/material";
-import { Box, Container } from "@mui/system";
-import React, { ReactNode } from "react";
-import { Outlet } from "react-router-dom";
-import Logo from "../../components/Logo";
+import React, { ReactNode } from 'react';
+import { Outlet } from 'react-router-dom';
+
+import { Button, Grid, Paper, TextField } from '@mui/material';
+import { Box, Container } from '@mui/system';
+
+import Logo from '../../components/Logo';
 
 const AuthLayout = () => {
   return (
@@ -11,7 +13,7 @@ const AuthLayout = () => {
       display="flex"
       justifyContent="center"
       alignItems="center"
-      sx={{ backgroundColor: "#E3F2FD" }}
+      sx={{ backgroundImage: `url('/images/background.jpg')` }}
     >
       <Box width={500}>
         <Paper

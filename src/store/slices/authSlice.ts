@@ -1,11 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 export interface AuthState {
   logged: boolean;
 }
 
 const initialState: AuthState = {
-  logged: false,
+  logged: true,
 };
 
 export const authSlice = createSlice({
