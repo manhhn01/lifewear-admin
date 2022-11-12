@@ -1,8 +1,8 @@
-import CategoryIcon from '@mui/icons-material/Category';
-import HomeIcon from '@mui/icons-material/Home';
-import Inventory2Icon from '@mui/icons-material/Inventory2';
+import CategoryIcon from "@mui/icons-material/Category";
+import HomeIcon from "@mui/icons-material/Home";
+import Inventory2Icon from "@mui/icons-material/Inventory2";
 
-import { theme } from '../themes';
+import { theme } from "../themes";
 
 export const SIDEBAR_WIDTH = theme.spacing(32.5);
 export const SIDEBAR_CLOSED_WIDTH = theme.spacing(8);
@@ -25,3 +25,5 @@ export const NAV_ITEMS = [
     url: "/categories",
   },
 ];
+
+export const PAGESIZE_OPTIONS = [10, 25, 50, 100, 200];

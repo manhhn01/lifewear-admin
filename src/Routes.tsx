@@ -1,14 +1,19 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { Navigate, Outlet, useRoutes } from 'react-router-dom';
+import React from "react";
+import { useSelector } from "react-redux";
+import {
+  Navigate,
+  Outlet,
+  useRoutes,
+} from "react-router-dom";
 
-import AuthLayout from './containers/layouts/AuthLayout';
-import DefaultLayout from './containers/layouts/DefaultLayout';
-import LoginPage from './pages/Auth/Login';
-import CategoryListPage from './pages/Category/CategoryList';
-import DashboardPage from './pages/Dashboard';
-import ProductListPage from './pages/Product/ProductList';
-import { RootState } from './store';
+import AuthLayout from "./containers/layouts/AuthLayout";
+import DefaultLayout from "./containers/layouts/DefaultLayout";
+import LoginPage from "./pages/Auth/Login";
+import CategoryListPage from "./pages/Category/CategoryList";
+import DashboardPage from "./pages/Dashboard";
+import ProductCreatePage from "./pages/Product/ProductCreate";
+import ProductListPage from "./pages/Product/ProductList";
+import { RootState } from "./store";
 
 const Routes = () => {
   const auth = useSelector((state: RootState) => state.auth);
@@ -20,7 +25,7 @@ const Routes = () => {
     },
     // Auth routes
     {
-      element: auth.logged ? <DefaultLayout /> : <Navigate to="/auth/login" />,
+      element: !!auth.token ? <DefaultLayout /> : <Navigate to="/auth/login" />,
       children: [
         {
           path: "/dashboard",
@@ -31,6 +36,10 @@ const Routes = () => {
           element: <ProductListPage />,
         },
         {
+          path: "/products/create",
+          element: <ProductCreatePage />,
+        },
+        {
           path: "/categories",
           element: <CategoryListPage />,
         },
@@ -39,7 +48,7 @@ const Routes = () => {
     // Guest routes
     {
       path: "/auth",
-      element: !auth.logged ? <AuthLayout /> : <Navigate to="/dashboard" />,
+      element: !auth.token ? <AuthLayout /> : <Navigate to="/dashboard" />,
       children: [
         {
           path: "login",

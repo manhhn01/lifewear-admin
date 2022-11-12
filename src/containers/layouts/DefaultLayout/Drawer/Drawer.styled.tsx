@@ -1,5 +1,10 @@
-import { styled, Theme, CSSObject } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
+import {
+  CSSObject,
+  styled,
+  Theme,
+} from "@mui/material/styles";
+
 import {
   HEADER_HEIGHT,
   SIDEBAR_CLOSED_WIDTH,
@@ -33,6 +38,7 @@ export const Drawer = styled(MuiDrawer, {
   boxSizing: "border-box",
   "& .MuiPaper-root.MuiDrawer-paper": {
     top: HEADER_HEIGHT,
+    borderRightColor: theme.palette.grey[100],
   },
   ...(open && {
     ...openedMixin(theme),

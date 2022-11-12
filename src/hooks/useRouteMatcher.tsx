@@ -1,4 +1,7 @@
-import { matchPath, useLocation } from "react-router-dom";
+import {
+  matchPath,
+  useLocation,
+} from "react-router-dom";
 
 export const useRouteMatcher = () => {
   const { pathname } = useLocation();

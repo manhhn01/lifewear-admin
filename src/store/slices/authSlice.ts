@@ -1,17 +1,32 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { CaseReducer, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface AuthState {
-  logged: boolean;
+  token?: string;
 }
 
 const initialState: AuthState = {
-  logged: true,
+  token: localStorage.getItem("token") || undefined,
+};
+
+const setToken: CaseReducer<AuthState, PayloadAction<{ token: string }>> = (
+  state,
+  { payload: { token } }
+) => {
+  state.token = token;
+  localStorage.setItem("token", token);
+};
+
+const clearToken: CaseReducer<AuthState> = (state) => {
+  delete state.token;
 };
 
 export const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    setToken,
+    clearToken,
+  },
 });
 
 export const authReducer = authSlice.reducer;

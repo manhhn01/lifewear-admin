@@ -1,6 +1,14 @@
 import styled from "@emotion/styled";
-import { Box, BoxProps } from "@mui/material";
-import { SIDEBAR_CLOSED_WIDTH, SIDEBAR_WIDTH } from "../../../constants";
+import {
+  Box,
+  BoxProps,
+} from "@mui/material";
+
+import {
+  HEADER_HEIGHT,
+  SIDEBAR_CLOSED_WIDTH,
+  SIDEBAR_WIDTH,
+} from "../../../constants";
 
 interface MainProps {
   open: boolean;
@@ -9,6 +17,8 @@ interface MainProps {
 export const MainStyled = styled("main", {
   shouldForwardProp: (propName) => propName !== "open",
 })<MainProps>`
+  height: calc(100vh - ${HEADER_HEIGHT});
+  overflow-y: auto;
   transition: ${({ theme }) =>
     theme.transitions.create("padding", {
       easing: theme.transitions.easing.sharp,
